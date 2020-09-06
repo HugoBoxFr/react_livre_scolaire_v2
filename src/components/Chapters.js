@@ -19,6 +19,9 @@ class Chapters extends React.Component {
                         if (loading) return <div>Chargement...</div>;
                         if (error) return <div>Erreur : {error.toString()}</div>;
                         const chapters = data.viewer.chapters.hits;
+                        chapters.sort((a, b) => {
+                            return a.number - b.number;
+                        });
                         const title = chapters[0].book.title;
 
                         return (

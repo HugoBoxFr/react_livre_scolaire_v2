@@ -40,6 +40,7 @@ export const POSTS_CHAPTERS = gql`
                         title
                         id
                     }
+                    number
                 }
             }
         }
@@ -59,6 +60,7 @@ export const POSTS_LESSONS = gql`
                         id
                         title
                     }
+                    valid
                 }
             }
         }

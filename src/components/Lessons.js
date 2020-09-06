@@ -19,8 +19,10 @@ class Lessons extends React.Component {
                         if (loading) return <div>Chargement...</div>;
                         if (error) return <div>Erreur : {error.toString()}</div>;
                         const lessons = data.viewer.lessons.hits;
+                        lessons.sort((a, b) => {
+                            return a.page - b.page;
+                        });
                         const title = lessons[0].chapter.title;
-                        console.log(lessons)
 
                         return (
                             <div>
