@@ -12,10 +12,6 @@ function Navigation() {
               <li>
                 <Link to="/livres">Tous les livres</Link>
               </li>
-{/* 
-              <li>
-                <Link to="/livres/:id">Votre sélection</Link>
-              </li> */}
             </ul>
         </nav>
     );

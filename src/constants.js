@@ -1,10 +1,12 @@
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 
+
 export const client = new ApolloClient({
   uri: "https://api-dev.lelivrescolaire.fr/graphql"
 });
  
+
 export const POSTS_BOOKS = gql`
     query {
         viewer {
@@ -22,20 +24,35 @@ export const POSTS_BOOKS = gql`
                 }
             }
         }
-    }
-`;
+    }`;
+
 
 export const POSTS_CHAPTERS = gql`
     query {
         viewer {
-            chapters(bookIds: 1339497) {
-            hits {
-            title
-            id
-            valid
-            url
+            chapters (bookIds: 1339497) {
+                hits {
+                    title
+                    id
+                    valid
+                    url
+                }
             }
         }
+    }`;
+
+
+export const POSTS_LESSONS = gql`
+    query {
+        viewer {
+            lessons (chapterIds: 1990054) {
+                hits {
+                    title
+                    lessonType
+                    page
+                    thematic 
+                }
+            }
         }
-    }
-`;
+    }`;
+

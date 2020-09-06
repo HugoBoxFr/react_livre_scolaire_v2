@@ -2,11 +2,11 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import { ApolloProvider } from 'react-apollo';
-import * as Constants from './../constants';
-import Book from './Book';
+import * as Constants from '../constants';
+import Chapters from './Chapters';
 
  
-class BooksList extends React.Component {
+class Books extends React.Component {
     render() {
         return (
             <div>
@@ -21,8 +21,8 @@ class BooksList extends React.Component {
                     return (
                         <div>
                             {
-                                books.map((book) => {
-                                    return <div key={book.id}>
+                                books.map((book) =>  book.displayTitle !== null ? 
+                                    <div key={book.id}>
                                         <div client={Constants.client}>
                                             <Router>
                                                 <Link to={`/livres/${book.id}`}>
@@ -30,18 +30,19 @@ class BooksList extends React.Component {
                                                 </Link>
 
                                                 <Switch>
-                                                    <Route path="/livres/:id">
+                                                    <Route path="/livres/:bookId">
                                                         <div>
                                                             <ApolloProvider client={Constants.client}>
-                                                                <Book book={book}/>
+                                                                <Chapters book={book}/>
                                                             </ApolloProvider>
                                                         </div>
                                                     </Route>
                                                 </Switch>
                                             </Router>
                                         </div>
-                                    </div>
-                                })
+                                        <hr />
+                                    </div> : ''
+                                )
                             }
                         </div>
                     )
@@ -52,4 +53,4 @@ class BooksList extends React.Component {
     }
 }
 
-export default BooksList;
+export default Books;

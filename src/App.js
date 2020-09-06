@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { ApolloProvider } from 'react-apollo';
 import './App.css';
 import Navigation from './components/Navigation';
-import BooksList from './components/BooksList';
+import Books from './components/Books';
 import * as Constants from './constants';
 
 
@@ -14,26 +14,10 @@ function App() {
         <Navigation />
 
         <Switch>
-          {/* <Route exact path="/livres/:id">
-            <div className="App">
-              <ApolloProvider client={client}>
-                <Book id={1339497} />
-              </ApolloProvider>
-            </div>
-          </Route> */}
-
-          {/* <Route exact path="/livres">
-            <div className="App">
-              <ApolloProvider client={client}>
-                <BooksList getId={(e) => { getId(e) }} />
-              </ApolloProvider>
-            </div>
-          </Route> */}
-
           <Route exact path="/livres">
             <div className="App">
               <ApolloProvider client={Constants.client}>
-                <BooksList />
+                <Books />
               </ApolloProvider>
             </div>
           </Route>
@@ -48,10 +32,6 @@ function App() {
     </div>
   );
 }
-
-// function getId(id) {
-//   return id;
-// }
 
 
 export default App;
