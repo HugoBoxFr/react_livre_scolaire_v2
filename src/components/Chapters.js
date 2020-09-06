@@ -1,56 +1,39 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import * as Constants from './../constants';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import { ApolloProvider } from 'react-apollo';
-import Lessons from './Lessons';
+import {Link} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 
 class Chapters extends React.Component {
+    
+    componentDidMount() {
+        const { match, location, history } = this.props;
+    }
+
     render() {
         return (
             <div>
-                <div className="book-info">
-                    <div className="book-image">
-                        <img src={this.props.book.url} alt={this.props.displayTitle} />
-                    </div>
-
-                    <h3>{this.props.book.displayTitle}</h3>
-                </div>
-
-
-                {/* how to input variables in query ? */}
-                <Query query={Constants.POSTS_CHAPTERS} variables={{ id: `${this.props.id}` }}>
+                <Query query={Constants.POSTS_CHAPTERS} variables={{ id: `${[this.props.match.params.bookId]}` }}>
                     {({ loading, error, data }) => {
                         if (loading) return <div>Chargement...</div>;
                         if (error) return <div>Erreur : {error.toString()}</div>;
                         const chapters = data.viewer.chapters.hits;
+                        const title = chapters[0].book.title;
 
                         return (
                             <div>
+                                <h5>{title}</h5>
                                 {
-                                    chapters.map((chapter) => {
-                                        return <div key={chapter.id}>
-                                            <div client={Constants.client}>
-                                                <Router>
-                                                    <Link to={`/livres/${this.props.book.id}/${chapter.id}`}>
-                                                        <h5>{chapter.title}</h5>
-                                                        <img src={chapter.url} alt={chapter.title} style={{ width: "30px" }}/>
-                                                    </Link>
-
-                                                    <Switch>
-                                                        <Route path="/livres/:bookId/:chapterId">
-                                                            <div>
-                                                                <ApolloProvider client={Constants.client}>
-                                                                    <Lessons chapter={chapter} />
-                                                                </ApolloProvider>
-                                                            </div>
-                                                        </Route>
-                                                    </Switch>
-                                                </Router>
+                                    chapters.map((chapter) =>  
+                                        <div key={chapter.id}>
+                                            <div>
+                                                <Link to={`/book/${chapter.book.id}/chapter/${chapter.id}`}>
+                                                    <h5>{chapter.title}</h5>
+                                                </Link>
                                             </div>
                                         </div>
-                                    })
+                                    )
                                 }
                             </div>
                         );
@@ -61,4 +44,6 @@ class Chapters extends React.Component {
     }
 }
 
-export default Chapters;
+
+const ChaptersWithRouter = withRouter(Chapters);
+export default ChaptersWithRouter;

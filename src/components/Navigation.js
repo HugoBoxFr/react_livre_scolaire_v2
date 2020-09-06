@@ -10,7 +10,7 @@ function Navigation() {
               </li>
 
               <li>
-                <Link to="/livres">Tous les livres</Link>
+                <Link to="/books">Tous les livres</Link>
               </li>
             </ul>
         </nav>

@@ -1,9 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import { ApolloProvider } from 'react-apollo';
+import {Link} from "react-router-dom";
 import * as Constants from '../constants';
-import Chapters from './Chapters';
 
  
 class Books extends React.Component {
@@ -23,22 +21,10 @@ class Books extends React.Component {
                             {
                                 books.map((book) =>  book.displayTitle !== null ? 
                                     <div key={book.id}>
-                                        <div client={Constants.client}>
-                                            <Router>
-                                                <Link to={`/livres/${book.id}`}>
-                                                    <h5>{book.displayTitle}</h5>
-                                                </Link>
-
-                                                <Switch>
-                                                    <Route path="/livres/:bookId">
-                                                        <div>
-                                                            <ApolloProvider client={Constants.client}>
-                                                                <Chapters book={book}/>
-                                                            </ApolloProvider>
-                                                        </div>
-                                                    </Route>
-                                                </Switch>
-                                            </Router>
+                                        <div>
+                                            <Link to={`/books/${book.id}`}>
+                                                <h5>{book.displayTitle}</h5>
+                                            </Link>
                                         </div>
                                         <hr />
                                     </div> : ''
