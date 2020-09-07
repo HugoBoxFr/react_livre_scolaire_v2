@@ -75,28 +75,28 @@ export const POST_LESSONS = gql`
         }
     }`;
 
-export const POST_LESSON = gql`
-    query ($id: [Int]) {
-        viewer {
-        lessons (chapterIds: $id) {
-            hits {
-                id
-                title
-                children {
-                    id
-                    url
-                    contentMd
-                    content
-                    order
-                    caption
-                    title
-                }
-                chapter {
-                    id
-                    title
-                }
-            }
-        }
-      }
-    }`;
+// export const POST_LESSON = gql`
+//     query ($id: [Int]) {
+//         viewer {
+//         lessons (chapterIds: $id) {
+//             hits {
+//                 id
+//                 title
+//                 children {
+//                     id
+//                     url
+//                     contentMd
+//                     content
+//                     order
+//                     caption
+//                     title
+//                 }
+//                 chapter {
+//                     id
+//                     title
+//                 }
+//             }
+//         }
+//       }
+//     }`;
 

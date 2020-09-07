@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import * as Constants from './../constants';
 import {Link} from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import './chapters.css';
 
 
 class Chapters extends React.Component {
@@ -26,18 +27,25 @@ class Chapters extends React.Component {
 
                         return (
                             <div>
-                                <h5>{title}</h5>
-                                {
-                                    chapters.map((chapter) =>  
-                                        <div key={chapter.id}>
-                                            <div>
-                                                <Link to={`/book/${chapter.book.id}/chapter/${chapter.id}`} >
-                                                    <h5>{chapter.title}</h5>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    )
-                                }
+                                <h3>{title}</h3>
+
+                                <div className="chapters">
+                                    {
+                                        chapters.map((chapter) =>  
+                                            <Link to={`/book/${chapter.book.id}/chapter/${chapter.id}`} key={chapter.id}>
+                                                <div key={chapter.id} className="chapter-elt" style={{ backgroundImage: `url(${chapter.url})` }}>
+                                                    <div className="chapter-number">
+                                                        <p>{chapter.number}</p>
+                                                    </div>
+
+                                                    <div className="chapter-title">
+                                                        <h5>{chapter.title}</h5>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        )
+                                    }
+                                </div>
                             </div>
                         );
                     }}
