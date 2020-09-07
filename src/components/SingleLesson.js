@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import * as Constants from './../constants';
 import { withRouter } from "react-router-dom";
 import ReactDOM from 'react-dom';
+import './singleLesson.css';
 
 
 class SingleLesson extends React.Component {
@@ -30,42 +31,40 @@ class SingleLesson extends React.Component {
     render() {
 
         return (
-            <div>
-                <Query query={Constants.POST_LESSONS} variables={{ id: `${[this.props.match.params.chapterId]}` }}>
-                    {({ loading, error, data }) => {
-                        if (loading) return <div>Chargement...</div>;
-                        if (error) return <div>Erreur : {error.toString()}</div>;
-                        const lessons = data.viewer.lessons.hits;
+            <Query query={Constants.POST_LESSONS} variables={{ id: `${[this.props.match.params.chapterId]}` }}>
+                {({ loading, error, data }) => {
+                    if (loading) return <div>Chargement...</div>;
+                    if (error) return <div>Erreur : {error.toString()}</div>;
+                    const lessons = data.viewer.lessons.hits;
 
-                        return (
-                            <div className="Lesson">
-                                <div>
-                                    {
-                                        lessons.map((elt, index) => 
+                    return (
+                        <div className="lesson-main">
+                            <div className="lesson-nav">
+                                {
+                                    lessons.map((elt, index) => 
+                                        <div>
+                                            <h5>{elt.title}</h5>
+
                                             <ul key={index}>
-                                                <h5>{elt.title}</h5>
-
                                                 { elt.children.map((lesson, ind) => {
                                                     return (
-                                                        <li key={ind}>
-                                                            <p onClick={() => this._handlePage(lesson)}>
-                                                                {ind}
-                                                            </p>
+                                                        <li key={ind} onClick={() => this._handlePage(lesson)}>
+                                                            {ind}
                                                         </li>
                                                     )
                                                 })}
                                             </ul>
-                                        )
-                                    }
-                                </div>
-
-                                <div id="text-content">
-                                </div>
+                                        </div>
+                                    )
+                                }
                             </div>
-                        )
-                    }}
-                </Query>
-            </div>
+
+                            <div id="text-content" className="lesson-content">
+                            </div>
+                        </div>
+                    )
+                }}
+            </Query>
         )
     }
 }

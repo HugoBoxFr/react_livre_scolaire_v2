@@ -1,3 +1,8 @@
+.chapter-main {
+    width: 1280px;
+    margin: 0 auto;
+}
+
 .chapters {
     display: flex;
     flex-wrap: wrap;

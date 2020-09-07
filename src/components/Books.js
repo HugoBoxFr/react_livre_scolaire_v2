@@ -8,7 +8,7 @@ import "./books.css";
 class Books extends React.Component {
     render() {
         return (
-            <div>
+            <div className="books-main">
                 <h2>Notre liste de livres scolaires</h2>
 
                 <Query query={Constants.POST_BOOKS}>
@@ -18,10 +18,10 @@ class Books extends React.Component {
                     const books = data.viewer.books.hits;
                 
                     return (
-                        <div className="Books">
+                        <div className="books">
                             {
                                 books.map((book) =>  book.displayTitle !== null ? 
-                                    <div key={book.id} className="Book">
+                                    <div key={book.id} className="book">
                                         <div>
                                             <Link to={`/books/${book.id}`}>
                                                 <div className="title">

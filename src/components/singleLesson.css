@@ -1,0 +1,43 @@
+.lesson-main {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lesson-nav {
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    width: 250px;
+    padding: 20px 20px 0;
+    color: white;
+    background-color: darkblue;
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    align-self: flex-start;
+}
+
+.lesson-nav h5 {
+    margin: 0;
+}
+
+.lesson-nav ul {
+    margin: 0 0 20px;
+    padding: 0 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lesson-nav ul li {
+    margin: 0 5px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.lesson-content {
+    width: 70%;
+    padding: 30px;
+    margin: 30px 50px 0 0;
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+}
