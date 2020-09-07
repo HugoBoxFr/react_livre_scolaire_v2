@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Query, useQuery } from 'react-apollo';
+import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
 import { withRouter } from "react-router-dom";
 import './singleLesson.css';
@@ -9,62 +9,45 @@ import { useRouteMatch, Route } from 'react-router-dom';
 function SingleLesson() {
     const match = useRouteMatch();
     const [lessons, setLessons] = useState([]);
-    const [lesson, setLesson] = useState('');
-    
+    let id = parseInt(match.params.lessonId);
+
     useEffect(() => {
         if (data) {
-            setLessons(data.viewer.lessons.hits);
+            const lessonList = data.viewer.lessons.hits
+            lessonList.sort((a, b) => {
+                return a.page - b.page;
+            });
+
+            filterList(lessonList);
         }
     });
 
-    function _handlePage(elt) {
-        setLesson(elt.content);
+    const filterList = (array) => {
+        let arr = array.filter(elt => elt.id === id);
+        let arrChildren = arr[0].children;
+        let arrSort = arrChildren.sort((a, b) => {
+            return a.order - b.order;
+        });
+        setLessons(arrSort);
     };
 
     const { data, error, loading } = useQuery(Constants.POST_LESSONS, { 
-        variables:  {id: `${[match.params.chapterId]}`},
-        suspend: false
+        variables:  {id: `${[match.params.chapterId]}`}
     });
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
-
-    let id = parseInt(match.params.lessonId);
     
     return (
         <div className="lesson-main">
-            <div className="lesson-nav"> 
+            <div className="lesson-display">
                 {
-                    lessons.map((lesson, index) => lesson.id === id ? 
-                    <div key={index}>
-                            <div>
-                                <h5>{lesson.title}</h5>
-
-                                <ul key={index}>
-                                        { lesson.children.map((elt, ind) => {
-                                            if (elt.order) {
-                                                return (
-                                                    <li key={elt.order} onClick={() => _handlePage(elt)}>
-                                                        {elt.order}
-                                                    </li>
-                                                )
-                                            } else {
-                                                return (
-                                                    <li key={ind} onClick={() => _handlePage(elt)}>
-                                                        {ind}
-                                                    </li>
-                                                )
-                                            }
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                        : ''
+                    lessons.map((elt, index) => 
+                        elt.content ?
+                            <div key={elt.id} dangerouslySetInnerHTML={{ __html: `${elt.content}` }} /> 
+                            : <div key={elt.id} dangerouslySetInnerHTML={{ __html: `${elt.contentMd}` }} />
                     )
                 }
-            </div>
-            <div className="lesson-content">
-                <div key={id} dangerouslySetInnerHTML={{ __html: `${lesson}` }} />
             </div>
         </div>
     )

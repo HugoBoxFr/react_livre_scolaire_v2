@@ -24,7 +24,8 @@ export const POST_BOOKS = gql`
                 }
             }
         }
-    }`;
+    }`
+;
 
 
 export const POST_CHAPTERS = gql`
@@ -44,10 +45,11 @@ export const POST_CHAPTERS = gql`
                 }
             }
         }
-    }`;
+    }`
+;
 
 
-export const POST_LESSONS = gql`
+export const POST_LESSONSLIST = gql`
     query ($id: [Int]) {
         viewer {
             lessons (chapterIds: $id) {
@@ -57,14 +59,39 @@ export const POST_LESSONS = gql`
                     page
                     thematic
                     valid
+                    chapter {
+                        id
+                        title
+                        book {
+                            id
+                            title
+                        }
+                    }
+                }
+            }
+        }
+    }`
+;
+
+
+export const POST_LESSONS = gql`
+    query ($id: [Int]) {
+        viewer {
+            lessons (chapterIds: $id) {
+                hits {
+                    id
+                    title
                     children {
                         id
-                        url
-                        contentMd
-                        content
-                        order
-                        caption
+                        type
                         title
+                        order
+                        content
+                        url
+                        poster
+                        creditPoster
+                        index
+                        contentMd
                     }
                     chapter {
                         id
@@ -73,37 +100,12 @@ export const POST_LESSONS = gql`
                             id
                             title
                         }
-                        lessons {
-                            page
-                        }
                     }
                 }
             }
         }
-    }`;
+    }`
+;
 
-// export const POST_LESSON = gql`
-//     query ($id: [Int]) {
-//         viewer {
-//         lessons (chapterIds: $id) {
-//             hits {
-//                 id
-//                 title
-//                 children {
-//                     id
-//                     url
-//                     contentMd
-//                     content
-//                     order
-//                     caption
-//                     title
-//                 }
-//                 chapter {
-//                     id
-//                     title
-//                 }
-//             }
-//         }
-//       }
-//     }`;
+
 

@@ -12,7 +12,7 @@ import NotFound from './components/NotFound';
 
 
 function App() {
-  const [lesson, setLesson] = useState('');
+  // const [lesson, setLesson] = useState('');
 
     return (
       <ApolloProvider client={Constants.client}>
@@ -26,7 +26,8 @@ function App() {
               <Route path="/book/:bookId" component={Chapters} />
 
               <Route path="/:bookId/chapter/:chapterId">
-                <Lessons handleLesson={(value) => setLesson(value)}/>
+                {/* <Lessons updateLesson={sortLesson}/> */}
+                <Lessons />
               </Route>
 
               <Route path="/:bookId/:chapterId/lesson/:lessonId" component={SingleLesson}/>
@@ -42,5 +43,12 @@ function App() {
 const Home = () => {
   return <h1>Bienvenue sur "Le Livre Scolaire"</h1>;
 }
+
+// const sortLesson = (props) => {
+//   // let lessonList = props[0];
+//   // let lessonId = props[1];
+//   // let lessonSelected = lessonList.filter(elt => elt.id === lessonId);
+//   console.log(lessonSelected)
+// }
 
 export default App;

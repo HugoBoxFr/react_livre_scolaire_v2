@@ -1,20 +1,62 @@
-import React from 'react';
-import { Query } from 'react-apollo';
+// import React from 'react';
+// import { Query } from 'react-apollo';
+// import * as Constants from './../constants';
+// import {Link} from "react-router-dom";
+// import { withRouter } from "react-router-dom";
+
+import React, { useState, useEffect } from 'react';
+import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import {Link} from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+import './singleLesson.css';
+import { useRouteMatch } from 'react-router-dom';
 
 
-class Lessons extends React.Component {
+function Lessons() {
+    const match = useRouteMatch();
+    const [lessons, setLessons] = useState([]);
+    
+    useEffect(() => {
+        if (data) {
+            const lessonList = data.viewer.lessons.hits
+            lessonList.sort((a, b) => {
+                return a.page - b.page;
+            });
+            setLessons(lessonList);
+        }
+    });
 
-    componentDidMount() {
-        // const { match, location, history } = this.props;
-    }
+    const { data, error, loading } = useQuery(Constants.POST_LESSONSLIST, { 
+        variables:  {id: `${[match.params.chapterId]}`},
+        suspend: false
+    });
 
-    render() {
+    if (loading) return <div>Chargement...</div>;
+    if (error) return <div>Erreur : {error.toString()}</div>;
+
+
         return (
             <div>
-                <Query query={Constants.POST_LESSONS} variables={{ id: `${[this.props.match.params.chapterId]}` }}>
+                <div>
+                    {
+                        lessons.map((lesson) =>  
+                            <div key={lesson.id}>
+                                <div>
+                                    <Link to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} >
+                                        <h5>{lesson.title}</h5>
+                                    </Link>
+                                    <p>{lesson.page}</p>
+                                    <p>{lesson.thematic}</p>
+                                </div>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+
+            
+            //<div>
+                /* <Query query={Constants.POST_LESSONS} variables={{ id: `${[this.props.match.params.chapterId]}` }}>
                     {({ loading, error, data }) => {
                         if (loading) return <div>Chargement...</div>;
                         if (error) return <div>Erreur : {error.toString()}</div>;
@@ -29,9 +71,9 @@ class Lessons extends React.Component {
                                     lessons.map((lesson) =>  
                                         <div key={lesson.id}>
                                             <div>
-                                                <Link to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} onClick={() => this.props.handleLesson(lesson)}>
+                                                <div to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} onClick={() => this.props.updateLesson([lesson, lesson.id])}>
                                                     <h5>{lesson.title}</h5>
-                                                </Link>
+                                                </div>
                                                 <p>{lesson.page}</p>
                                                 <p>{lesson.thematic}</p>
                                             </div>
@@ -41,10 +83,9 @@ class Lessons extends React.Component {
                             </div>
                         );
                     }}
-                </Query>
-            </div>
+                </Query> */
+            //</div>
         )
-    }
 }
 
 const LessonsWithRouter = withRouter(Lessons);
