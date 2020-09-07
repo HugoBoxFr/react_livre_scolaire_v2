@@ -10,7 +10,7 @@ class Books extends React.Component {
             <div>
                 <h2>Notre liste de livres scolaires</h2>
 
-                <Query query={Constants.POSTS_BOOKS}>
+                <Query query={Constants.POST_BOOKS}>
                     {({ loading, error, data }) => {
                     if (loading) return <div>Chargement...</div>;
                     if (error) return <div>Erreur : {error.toString()}</div>;

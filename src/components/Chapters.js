@@ -14,7 +14,7 @@ class Chapters extends React.Component {
     render() {
         return (
             <div>
-                <Query query={Constants.POSTS_CHAPTERS} variables={{ id: `${[this.props.match.params.bookId]}` }}>
+                <Query query={Constants.POST_CHAPTERS} variables={{ id: `${[this.props.match.params.bookId]}` }}>
                     {({ loading, error, data }) => {
                         if (loading) return <div>Chargement...</div>;
                         if (error) return <div>Erreur : {error.toString()}</div>;
@@ -31,7 +31,7 @@ class Chapters extends React.Component {
                                     chapters.map((chapter) =>  
                                         <div key={chapter.id}>
                                             <div>
-                                                <Link to={`/book/${chapter.book.id}/chapter/${chapter.id}`}>
+                                                <Link to={`/book/${chapter.book.id}/chapter/${chapter.id}`} >
                                                     <h5>{chapter.title}</h5>
                                                 </Link>
                                             </div>

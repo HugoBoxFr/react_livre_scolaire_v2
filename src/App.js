@@ -6,52 +6,51 @@ import Navigation from './components/Navigation';
 import Books from './components/Books';
 import Chapters from './components/Chapters';
 import Lessons from './components/Lessons';
+import SingleLesson from './components/SingleLesson';
 import * as Constants from './constants';
 
 
 function App() {
-  return (
-    <ApolloProvider client={Constants.client}>
-      <div className="App">
-        <Router>  
-          <Navigation />
 
-          <Switch>
-            <Route exact path="/books">
-              <div>
+    return (
+      <ApolloProvider client={Constants.client}>
+        <div className="App">
+          <Router>  
+            <Navigation />
+  
+            <Switch>
+              <Route exact path="/books">
                 <Books />
-              </div>
-            </Route>
-
-            <Route exact path="/">
-              <div>
-                <h1>Bienvenue sur "Le Livre Scolaire"</h1>
-              </div>
-            </Route>
-
-            <Route path="/books/:bookId">
-              <div>
+              </Route>
+  
+              <Route path="/books/:bookId">
                 <Chapters />
-              </div>
-            </Route>
-
-            <Route path="/book/:bookId/chapter/:chapterId">
-              <div>
+              </Route>
+  
+              <Route path="/book/:bookId/chapter/:chapterId">
                 <Lessons />
-              </div>
-            </Route>
+              </Route>
+  
+              <Route path="/chapter/:chapterId/lesson/:lessonId">
+                <SingleLesson />
+              </Route>
 
-            <Route path="/chapter/:chapterId/lesson/:lessonId">
-              <div>
-                <p>ok</p>
-              </div>
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    </ApolloProvider>
-  );
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
+      </ApolloProvider>
+    );
 }
 
+function Home() {
+  return (
+    <div>
+      <h1>Bienvenue sur "Le Livre Scolaire"</h1>
+    </div>
+  )
+}
 
 export default App;

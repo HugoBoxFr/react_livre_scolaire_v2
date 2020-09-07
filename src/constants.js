@@ -7,7 +7,7 @@ export const client = new ApolloClient({
 });
  
 
-export const POSTS_BOOKS = gql`
+export const POST_BOOKS = gql`
     query ($id: [Int]) {
         viewer {
             books (ids: $id) {
@@ -27,7 +27,7 @@ export const POSTS_BOOKS = gql`
     }`;
 
 
-export const POSTS_CHAPTERS = gql`
+export const POST_CHAPTERS = gql`
     query ($id: [Int]) {
         viewer {
             chapters (bookIds: $id) {
@@ -47,7 +47,7 @@ export const POSTS_CHAPTERS = gql`
     }`;
 
 
-export const POSTS_LESSONS = gql`
+export const POST_LESSONS = gql`
     query ($id: [Int]) {
         viewer {
             lessons (chapterIds: $id) {
@@ -61,8 +61,42 @@ export const POSTS_LESSONS = gql`
                         title
                     }
                     valid
+                    children {
+                        id
+                        url
+                        contentMd
+                        content
+                        order
+                        caption
+                        title
+                    }
                 }
             }
         }
+    }`;
+
+export const POST_LESSON = gql`
+    query ($id: [Int]) {
+        viewer {
+        lessons (chapterIds: $id) {
+            hits {
+                id
+                title
+                children {
+                    id
+                    url
+                    contentMd
+                    content
+                    order
+                    caption
+                    title
+                }
+                chapter {
+                    id
+                    title
+                }
+            }
+        }
+      }
     }`;
 
