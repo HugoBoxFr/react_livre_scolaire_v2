@@ -29,7 +29,7 @@ class Lessons extends React.Component {
                                     lessons.map((lesson) =>  
                                         <div key={lesson.id}>
                                             <div>
-                                                <Link to={`/chapter/${lesson.chapter.id}/lesson/${lesson.id}`} onClick={() => this.props.handleLesson(lesson)}>
+                                                <Link to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} onClick={() => this.props.handleLesson(lesson)}>
                                                     <h5>{lesson.title}</h5>
                                                 </Link>
                                                 <p>{lesson.page}</p>

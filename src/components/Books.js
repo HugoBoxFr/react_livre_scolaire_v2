@@ -23,7 +23,7 @@ class Books extends React.Component {
                                 books.map((book) =>  book.displayTitle !== null ? 
                                     <div key={book.id} className="book">
                                         <div>
-                                            <Link to={`/books/${book.id}`}>
+                                            <Link to={`/book/${book.id}`}>
                                                 <div className="title">
                                                     <h3>{book.displayTitle}</h3>
                                                 </div>

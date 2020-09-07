@@ -8,6 +8,7 @@ import Chapters from './components/Chapters';
 import Lessons from './components/Lessons';
 import SingleLesson from './components/SingleLesson';
 import * as Constants from './constants';
+import NotFound from './components/NotFound';
 
 
 function App() {
@@ -20,25 +21,17 @@ function App() {
             <Navigation />
   
             <Switch>
-              <Route exact path="/books">
-                <Books />
-              </Route>
-  
-              <Route path="/books/:bookId">
-                <Chapters />
-              </Route>
-  
-              <Route path="/book/:bookId/chapter/:chapterId">
+              <Route exact path="/" component={Home} />
+              <Route exact path="/books" component={Books} />
+              <Route path="/book/:bookId" component={Chapters} />
+
+              <Route path="/:bookId/chapter/:chapterId">
                 <Lessons handleLesson={(value) => setLesson(value)}/>
               </Route>
-  
-              <Route path="/chapter/:chapterId/lesson/:lessonId">
-                <SingleLesson lesson={lesson}/>
-              </Route>
 
-              <Route exact path="/">
-                <Home />
-              </Route>
+              <Route path="/:bookId/:chapterId/lesson/:lessonId" component={SingleLesson}/>
+
+              <Route component={NotFound}/>
             </Switch>
           </Router>
         </div>
@@ -46,13 +39,8 @@ function App() {
     );
 }
 
-function Home() {
-  return (
-    <div>
-      <h1>Bienvenue sur "Le Livre Scolaire"</h1>
-    </div>
-  )
+const Home = () => {
+  return <h1>Bienvenue sur "Le Livre Scolaire"</h1>;
 }
-
 
 export default App;

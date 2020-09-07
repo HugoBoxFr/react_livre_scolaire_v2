@@ -31,7 +31,7 @@ class Chapters extends React.Component {
                             <div className="chapters">
                                 {
                                     chapters.map((chapter) =>  
-                                        <Link to={`/book/${chapter.book.id}/chapter/${chapter.id}`} key={chapter.id}>
+                                        <Link to={`/${chapter.book.id}/chapter/${chapter.id}`} key={chapter.id}>
                                             <div key={chapter.id} className="chapter-elt" style={{ backgroundImage: `url(${chapter.url})` }}>
                                                 <div className="chapter-number">
                                                     <p>{chapter.number}</p>
