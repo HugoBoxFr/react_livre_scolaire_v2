@@ -9,7 +9,7 @@ import './chapters.css';
 class Chapters extends React.Component {
     
     componentDidMount() {
-        const { match, location, history } = this.props;
+        // const { match, location, history } = this.props;
     }
 
     render() {

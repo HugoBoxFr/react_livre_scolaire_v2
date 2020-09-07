@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 class Lessons extends React.Component {
 
     componentDidMount() {
-        const { match, location, history } = this.props;
+        // const { match, location, history } = this.props;
     }
 
     render() {
@@ -29,7 +29,7 @@ class Lessons extends React.Component {
                                     lessons.map((lesson) =>  
                                         <div key={lesson.id}>
                                             <div>
-                                                <Link to={`/chapter/${lesson.chapter.id}/lesson/${lesson.id}`}>
+                                                <Link to={`/chapter/${lesson.chapter.id}/lesson/${lesson.id}`} onClick={() => this.props.handleLesson(lesson)}>
                                                     <h5>{lesson.title}</h5>
                                                 </Link>
                                                 <p>{lesson.page}</p>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { ApolloProvider } from 'react-apollo';
 import './App.css';
@@ -11,6 +11,7 @@ import * as Constants from './constants';
 
 
 function App() {
+  const [lesson, setLesson] = useState('');
 
     return (
       <ApolloProvider client={Constants.client}>
@@ -28,11 +29,11 @@ function App() {
               </Route>
   
               <Route path="/book/:bookId/chapter/:chapterId">
-                <Lessons />
+                <Lessons handleLesson={(value) => setLesson(value)}/>
               </Route>
   
               <Route path="/chapter/:chapterId/lesson/:lessonId">
-                <SingleLesson />
+                <SingleLesson lesson={lesson}/>
               </Route>
 
               <Route exact path="/">
@@ -52,5 +53,6 @@ function Home() {
     </div>
   )
 }
+
 
 export default App;

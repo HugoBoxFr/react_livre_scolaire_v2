@@ -56,10 +56,6 @@ export const POST_LESSONS = gql`
                     title
                     page
                     thematic
-                    chapter {
-                        id
-                        title
-                    }
                     valid
                     children {
                         id
@@ -69,6 +65,14 @@ export const POST_LESSONS = gql`
                         order
                         caption
                         title
+                    }
+                    chapter {
+                        id
+                        title
+                        book {
+                            id
+                            title
+                        }
                     }
                 }
             }
