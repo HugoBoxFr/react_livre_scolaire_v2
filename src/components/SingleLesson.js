@@ -3,7 +3,7 @@ import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
 import { withRouter } from "react-router-dom";
 import './singleLesson.css';
-import { useRouteMatch, Route } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 
 
 function SingleLesson() {
@@ -14,16 +14,15 @@ function SingleLesson() {
     useEffect(() => {
         if (data) {
             const lessonList = data.viewer.lessons.hits
-            lessonList.sort((a, b) => {
-                return a.page - b.page;
-            });
-
             filterList(lessonList);
         }
     });
 
     const filterList = (array) => {
-        let arr = array.filter(elt => elt.id === id);
+        let firstArray = array.sort((a, b) => {
+            return a.page - b.page;
+        });
+        let arr = firstArray.filter(elt => elt.id === id);
         let arrChildren = arr[0].children;
         let arrSort = arrChildren.sort((a, b) => {
             return a.order - b.order;

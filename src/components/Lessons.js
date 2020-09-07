@@ -1,9 +1,3 @@
-// import React from 'react';
-// import { Query } from 'react-apollo';
-// import * as Constants from './../constants';
-// import {Link} from "react-router-dom";
-// import { withRouter } from "react-router-dom";
-
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
@@ -19,12 +13,16 @@ function Lessons() {
     useEffect(() => {
         if (data) {
             const lessonList = data.viewer.lessons.hits
-            lessonList.sort((a, b) => {
-                return a.page - b.page;
-            });
-            setLessons(lessonList);
+            filterList(lessonList);
         }
     });
+
+    const filterList = (array) => {
+        let arrSort = array.sort((a, b) => {
+            return a.page - b.page;
+        });
+        setLessons(arrSort);
+    };
 
     const { data, error, loading } = useQuery(Constants.POST_LESSONSLIST, { 
         variables:  {id: `${[match.params.chapterId]}`},
@@ -35,57 +33,25 @@ function Lessons() {
     if (error) return <div>Erreur : {error.toString()}</div>;
 
 
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    {
-                        lessons.map((lesson) =>  
-                            <div key={lesson.id}>
-                                <div>
-                                    <Link to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} >
-                                        <h5>{lesson.title}</h5>
-                                    </Link>
-                                    <p>{lesson.page}</p>
-                                    <p>{lesson.thematic}</p>
-                                </div>
-                            </div>
-                        )
-                    }
-                </div>
-            </div>
-
-            
-            //<div>
-                /* <Query query={Constants.POST_LESSONS} variables={{ id: `${[this.props.match.params.chapterId]}` }}>
-                    {({ loading, error, data }) => {
-                        if (loading) return <div>Chargement...</div>;
-                        if (error) return <div>Erreur : {error.toString()}</div>;
-                        const lessons = data.viewer.lessons.hits;
-                        lessons.sort((a, b) => {
-                            return a.page - b.page;
-                        });
-
-                        return (
+                {
+                    lessons.map((lesson) =>  
+                        <div key={lesson.id}>
                             <div>
-                                {
-                                    lessons.map((lesson) =>  
-                                        <div key={lesson.id}>
-                                            <div>
-                                                <div to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} onClick={() => this.props.updateLesson([lesson, lesson.id])}>
-                                                    <h5>{lesson.title}</h5>
-                                                </div>
-                                                <p>{lesson.page}</p>
-                                                <p>{lesson.thematic}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                }
+                                <Link to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} >
+                                    <h5>{lesson.title}</h5>
+                                </Link>
+                                <p>{lesson.page}</p>
+                                <p>{lesson.thematic}</p>
                             </div>
-                        );
-                    }}
-                </Query> */
-            //</div>
-        )
+                        </div>
+                    )
+                }
+            </div>
+        </div>
+    )
 }
 
 const LessonsWithRouter = withRouter(Lessons);
