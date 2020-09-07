@@ -9,7 +9,8 @@ class SingleLesson extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: ''
+            content: '',
+            children: ''
         }
     }
 
@@ -19,8 +20,22 @@ class SingleLesson extends React.Component {
         }
     }
 
-    _handlePage(lesson) {
+    _handlePage(lessons, index, ind) {
+        if (lessons && lessons[index].children !== undefined) {
+
+            if (!lessons[index].children[ind].contentMd) {
+                this.setState({ content : lessons[index].children[ind].content });
+            } else if (!lessons[index].children[ind].content) {
+                this.setState({ content : lessons[index].children[ind].contentMd });
+            }
+
+        }
+    }
+
+    _handlePage2(lesson) {
+        console.log(lesson);
         if (lesson) {
+
             this.setState({ content : lesson.contentMd });
         }
     }
@@ -35,6 +50,9 @@ class SingleLesson extends React.Component {
                         if (loading) return <div>Chargement...</div>;
                         if (error) return <div>Erreur : {error.toString()}</div>;
                         const lessons = data.viewer.lessons.hits;
+                        lessons.sort((a, b) => {
+                            return a.page - b.page;
+                        });
                         
                         return (
                             <div className="lesson-main">
@@ -47,7 +65,7 @@ class SingleLesson extends React.Component {
                                                 <ul key={index}>
                                                     { elt.children.map((lesson, ind) => {
                                                         return (
-                                                            <li key={ind} onClick={() => this._handlePage(lesson)}>
+                                                            <li key={ind} onClick={() => this._handlePage(lessons, index, ind)}>
                                                                 {ind}
                                                             </li>
                                                         )
@@ -60,7 +78,7 @@ class SingleLesson extends React.Component {
                                 </div>
 
                                 <div id="text-content" className="lesson-content">
-                                    {this.state.content !== '' ? <div dangerouslySetInnerHTML={{ __html: this.state.content }} /> : this.setState({ content: lessons[0].children[0].contentMd }) }
+                                    { this.state.content !== '' ? <div dangerouslySetInnerHTML={{ __html: this.state.content }} /> : this.setState({ content: lessons[0].children[0].contentMd }) }
                                 </div>
                             </div>
                         )
@@ -74,11 +92,13 @@ class SingleLesson extends React.Component {
                         <h5>{lesson.title}</h5>
                         <ul>
                             {
-                                lesson.children.map((elt, index) => {
-                                    return (
-                                        <li key={index} onClick={() => this._handlePage(elt)}>{index}</li>
-                                    )
-                                })
+                                lesson.children !== undefined ?
+                                    lesson.children.map((elt, index) => {
+                                        return (
+                                            <li key={index} onClick={() => this._handlePage2(elt)}>{index}</li>
+                                        )
+                                    })
+                                : ''
                             }
                         </ul>
                     </div>
@@ -91,7 +111,6 @@ class SingleLesson extends React.Component {
         }
     }
 }
-
 
 
 const SingleLessonWithRouter = withRouter(SingleLesson);

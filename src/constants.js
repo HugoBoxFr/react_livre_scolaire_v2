@@ -73,6 +73,9 @@ export const POST_LESSONS = gql`
                             id
                             title
                         }
+                        lessons {
+                            page
+                        }
                     }
                 }
             }
