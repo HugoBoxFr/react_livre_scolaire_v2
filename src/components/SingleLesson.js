@@ -11,6 +11,10 @@ function SingleLesson() {
     const [lessons, setLessons] = useState([]);
     let id = parseInt(match.params.lessonId);
 
+    const { data, error, loading } = useQuery(Constants.POST_LESSONS, { 
+        variables:  {id: `${[match.params.chapterId]}`}
+    });
+
     useEffect(() => {
         if (data) {
             const lessonList = data.viewer.lessons.hits
@@ -30,16 +34,16 @@ function SingleLesson() {
         setLessons(arrSort);
     };
 
-    const { data, error, loading } = useQuery(Constants.POST_LESSONS, { 
-        variables:  {id: `${[match.params.chapterId]}`}
-    });
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
+
+    console.log(lessons)
+
     
     return (
         <div className="lesson-main">
-            <div className="lesson-display">
+            <div className="lesson-content">
                 {
                     lessons.map((elt, index) => 
                         elt.content ?

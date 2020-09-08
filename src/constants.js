@@ -57,7 +57,7 @@ export const POST_LESSONSLIST = gql`
                     id
                     title
                     page
-                    thematic
+                    lessonType
                     valid
                     chapter {
                         id
@@ -92,6 +92,7 @@ export const POST_LESSONS = gql`
                         creditPoster
                         index
                         contentMd
+                        assets
                     }
                     chapter {
                         id
@@ -106,6 +107,3 @@ export const POST_LESSONS = gql`
         }
     }`
 ;
-
-
-
