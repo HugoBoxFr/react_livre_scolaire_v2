@@ -65,6 +65,11 @@ export const POST_LESSONSLIST = gql`
                         book {
                             id
                             title
+                            chapters {
+                                id
+                                number
+                                valid
+                            }
                         }
                     }
                 }
@@ -81,6 +86,7 @@ export const POST_LESSONS = gql`
                 hits {
                     id
                     title
+                    page
                     children {
                         id
                         type

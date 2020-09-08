@@ -39,9 +39,9 @@ function Chapters() {
         <div className="chapter-main">
             <div className="chapters-title">
                 <h3>{title}</h3>
-                <h4>Chapitres</h4>
             </div>
 
+            <h4>Chapitres</h4>
             <div className="chapters">
                 {
                     chapters.map((chapter) =>  

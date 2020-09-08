@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
 import { withRouter, Link } from "react-router-dom";
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import "./lessons.css";
 
 
 function Lessons() {
     const match = useRouteMatch();
+    const history = useHistory();
     const [lessons, setLessons] = useState([]);
+    const [chapters, setChapters] = useState('');
     const [title, setTitle] = useState('');
     const [subtitle, setSubTitle] = useState('');
 
@@ -25,6 +27,7 @@ function Lessons() {
     });
 
     const filterList = (array) => {
+        setChapters(array[0].chapter.book.chapters);
         let arrSort = array.sort((a, b) => {
             return a.page - b.page;
         });
@@ -36,13 +39,74 @@ function Lessons() {
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
 
+    const redirectToChapters = () => {
+        const path = `/book/${match.params.bookId}`;
+        history.push(path);
+    }
+
+    const getOnlyId = (array, newArray) => {
+        array.sort((a, b) => {
+            return a.number - b.number;
+        });
+        array.map((elt) => elt.valid ? newArray.push(elt.id) : '');
+        return newArray;
+    }
+
+    const next = () => {
+        let navArray = []
+        getOnlyId(chapters, navArray);
+        
+        const currentPage = parseInt(match.params.chapterId);
+        const currentIndex = (elt) => elt === currentPage;
+        const nextIndex = navArray.findIndex(currentIndex) + 1;
+
+        const btnBack = document.getElementById("back-chapter");
+        btnBack.removeAttribute("disabled");
+
+        if (nextIndex < navArray.length) {
+            const nextId = navArray[nextIndex];
+            const path = `/${match.params.bookId}/chapter/${nextId}`;
+            history.push(path);
+        } 
+        if (nextIndex === navArray.length - 1) {
+            const btnNext = document.getElementById("next-chapter");
+            btnNext.setAttribute("disabled", "");
+        }
+    }
+
+    const back = () => {
+        let navArray = []
+        getOnlyId(chapters, navArray);
+        
+        const currentPage = parseInt(match.params.chapterId);
+        const currentIndex = (elt) => elt === currentPage;
+        const lastIndex = navArray.findIndex(currentIndex) - 1;
+
+        const btnNext = document.getElementById("next-chapter");
+        btnNext.removeAttribute("disabled");
+
+        if (lastIndex >= 0) {
+            const lastId = navArray[lastIndex];
+            const path = `/${match.params.bookId}/chapter/${lastId}`;
+            history.push(path);
+            if (lastIndex === 0) {
+                const btnBack = document.getElementById("back-chapter");
+                btnBack.setAttribute("disabled", "");
+            }
+        } 
+    }
+
 
     return (
         <div className="index-main">
-            <h3>{title}</h3>
-            <h4>{subtitle}</h4>
+            <div className="index-title" onClick={redirectToChapters}>
+                <h3>{title}</h3>&nbsp;-&nbsp;<h4>{subtitle}</h4>
+            </div>
 
             <div className="index-container">
+                <h4>Tables des leçons</h4>
+                <hr />
+
                     <ul>
                         {
                             lessons.map((lesson) =>  
@@ -58,6 +122,12 @@ function Lessons() {
                             )
                         }
                     </ul>
+            </div>
+
+            <div className="index-nav">
+                <button onClick={back} id="back-chapter" title="Précédent"><i class="fas fa-arrow-circle-left"></i></button>
+                <button onClick={redirectToChapters} title="Chapitres"><i class="fas fa-book"></i></button>
+                <button onClick={next} id="next-chapter" title="Suivant"><i class="fas fa-chevron-circle-right"></i></button>
             </div>
         </div>
     )

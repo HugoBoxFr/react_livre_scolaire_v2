@@ -3,11 +3,24 @@
     margin: 0 auto;
 }
 
-.chapters-title {
-    margin: 15px 0 30px;
+.chapter-main h4 {
+    color: white;
+    font-size: 20px;
 }
 
-.chapters-title h3, .chapters-title h4 {
+.chapters-title {
+    height: 50px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.chapters-title h3 {
     margin: 0;
 }
 
