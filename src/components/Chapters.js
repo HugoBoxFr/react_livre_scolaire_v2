@@ -36,7 +36,6 @@ function Chapters() {
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
 
-    console.log(match);
     const redirectToChapters = () => {
         const path = `/books/${match.params.subjectId}/`;
         history.push(path);
