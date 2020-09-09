@@ -13,6 +13,8 @@ function Home(props) {
     }
 
     const subjects = Schema.subjects;
+
+    console.log(subjects);
     
     return (
         <div className="home">
@@ -25,8 +27,8 @@ function Home(props) {
                     {
                         subjects.map((elt) => {
                             return (
-                                <Link to={`/books/${elt.id}`} key={elt.id}>
-                                    <li key={elt.id} value={elt.id} onClick={handleSubject}>{elt.name}</li>
+                                <Link to={`/books/${elt.id}`} key={elt.id} >
+                                    <li key={elt.id} value={elt.id} onClick={handleSubject} style={{ backgroundImage: `url(${elt.url})` }}>{elt.name}</li>
                                 </Link>
                             )
                         })

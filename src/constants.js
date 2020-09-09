@@ -39,6 +39,7 @@ export const POST_FILTERED_BOOKS = gql`
                     subjects {
                         id
                         name
+                        url
                     }
                     levels {
                         name
@@ -81,6 +82,7 @@ export const POST_LESSONSLIST = gql`
                     page
                     lessonType
                     valid
+                    url
                     chapter {
                         id
                         title

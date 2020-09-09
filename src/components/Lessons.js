@@ -113,7 +113,7 @@ function Lessons() {
                                     <Link to={`/${match.params.subjectId}/${match.params.bookId}/${match.params.chapterId}/lesson/${lesson.id}`} style={{pointerEvents : lesson.valid ? '' : 'none'}}>
                                         <div className="index-info">
                                             <div className="index-img">
-                                                { lesson.url ? <img src={lesson.img} alt="lesson.title" /> : '' }
+                                                { lesson.url ? <img src={lesson.url} alt="lesson.title" /> : '' }
                                             </div>
 
                                             <div className="index-info-title">
