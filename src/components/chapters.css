@@ -143,3 +143,35 @@
     margin: 0;
     opacity: 0.5;
 }
+
+.chapter-nav {
+    position: fixed;
+    z-index: 5;
+    bottom: 50px;
+    right: 30px;
+}
+
+.chapter-nav button {
+    cursor: pointer;
+    margin-left: 5px;
+    border: none;
+    background: rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3);
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: blue;
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    outline: 0;
+}
+
+.chapter-nav button:disabled {
+    opacity: .5;
+    color: grey;
+}
+
+.chapter-info {
+    display: flex;
+    align-items: center;
+}

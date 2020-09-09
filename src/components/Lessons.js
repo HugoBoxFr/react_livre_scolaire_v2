@@ -39,7 +39,7 @@ function Lessons() {
     if (error) return <div>Erreur : {error.toString()}</div>;
 
     const redirectToChapters = () => {
-        const path = `/book/${match.params.bookId}`;
+        const path = `/${match.params.subjectId}/book/${match.params.bookId}`;
         history.push(path);
     }
 
@@ -64,7 +64,7 @@ function Lessons() {
 
         if (nextIndex < navArray.length) {
             const nextId = navArray[nextIndex];
-            const path = `/${match.params.bookId}/chapter/${nextId}`;
+            const path = `/${match.params.subjectId}/${match.params.bookId}/chapter/${nextId}`;
             history.push(path);
         } 
         if (nextIndex === navArray.length - 1) {
@@ -86,7 +86,7 @@ function Lessons() {
 
         if (lastIndex >= 0) {
             const lastId = navArray[lastIndex];
-            const path = `/${match.params.bookId}/chapter/${lastId}`;
+            const path = `/${match.params.subjectId}/${match.params.bookId}/chapter/${lastId}`;
             history.push(path);
             if (lastIndex === 0) {
                 const btnBack = document.getElementById("back-chapter");
@@ -98,7 +98,7 @@ function Lessons() {
 
     return (
         <div className="index-main">
-            <div className="index-title" onClick={redirectToChapters}>
+            <div className="index-title">
                 <h3>{title}</h3>&nbsp;-&nbsp;<h4>{subtitle}</h4>
             </div>
 
@@ -110,7 +110,7 @@ function Lessons() {
                         {
                             lessons.map((lesson) =>  
                                 <li key={lesson.id} className={lesson.valid === false ? 'index-link-false' : 'index-link'}>
-                                    <Link to={`/${match.params.bookId}/${match.params.chapterId}/lesson/${lesson.id}`} style={{pointerEvents : lesson.valid ? '' : 'none'}}>
+                                    <Link to={`/${match.params.subjectId}/${match.params.bookId}/${match.params.chapterId}/lesson/${lesson.id}`} style={{pointerEvents : lesson.valid ? '' : 'none'}}>
                                         <div className="index-info">
                                             <div className="index-img">
                                                 { lesson.url ? <img src={lesson.img} alt="lesson.title" /> : '' }
@@ -131,9 +131,9 @@ function Lessons() {
             </div>
 
             <div className="index-nav">
-                <button onClick={back} id="back-chapter" title="Précédent"><i class="fas fa-arrow-circle-left"></i></button>
-                <button onClick={redirectToChapters} title="Chapitres"><i class="fas fa-book"></i></button>
-                <button onClick={next} id="next-chapter" title="Suivant"><i class="fas fa-chevron-circle-right"></i></button>
+                <button onClick={back} id="back-chapter" title="Précédent"><i className="fas fa-arrow-circle-left"></i></button>
+                <button onClick={redirectToChapters} title="Chapitres"><i className="fas fa-book"></i></button>
+                <button onClick={next} id="next-chapter" title="Suivant"><i className="fas fa-chevron-circle-right"></i></button>
             </div>
         </div>
     )

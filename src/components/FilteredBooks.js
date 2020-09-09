@@ -1,49 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import "./books.css";
-// import Filter from './Filter';
+import { withRouter, Link, useRouteMatch } from "react-router-dom";
+import "./filteredBooks.css";
 
-
-function Books() {
+function FilteredBooks() {
+    const match = useRouteMatch();
     const [books, setBooks] = useState([]);
-    // const [subject, setSubject] = useState('');
+    const [title, setTitle] =useState('');
     
-    const { data, error, loading } = useQuery(Constants.POST_BOOKS);
+    const { data, error, loading } = useQuery(Constants.POST_FILTERED_BOOKS, { 
+        variables:  {id: match.params.subjectId}
+    });
     
     useEffect(() => {  
         if (data) {
             const booksList = data.viewer.books.hits;
             setBooks(booksList);
+            setTitle(booksList[0].subjects[0].name);
         }
     }, [data]);
-    
+
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
 
 
-    // function handleSubject(value) {
-    //     setSubject(value);
-
-    //     const filteredBooks = [];
-    //     books.map(elt => console.log(elt));
-    //     console.log(filteredBooks);
-    // }
-
-
     return (
-        <div className="chapter-main">
-            {/* <Filter onChange={handleSubject}/> */}
+        <div className="books-main">
+            <div className="books-title">
+                <h3>{title}</h3>
+            </div>
 
             <div className="books">
                 {
                     books.map((book) =>  book.displayTitle !== null ? 
                         <div key={book.id} className="book">
                             <div>
-                                <Link to={`/book/${book.id}`}>
+                                <Link to={`/${match.params.subjectId}/book/${book.id}`}>
                                     <div className="title">
                                         <h3>{book.displayTitle}</h3>
                                     </div>
@@ -62,5 +56,5 @@ function Books() {
 }
 
 
-const BooksWithRouter = withRouter(Books);
-export default BooksWithRouter;
+const FilteredBooksWithRouter = withRouter(FilteredBooks);
+export default FilteredBooksWithRouter;

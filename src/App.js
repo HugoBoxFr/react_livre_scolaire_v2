@@ -4,12 +4,13 @@ import { ApolloProvider } from 'react-apollo';
 import './App.css';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
-import Books from './components/Books';
 import Chapters from './components/Chapters';
 import Lessons from './components/Lessons';
 import SingleLesson from './components/SingleLesson';
 import * as Constants from './constants';
 import NotFound from './components/NotFound';
+import FilteredBooks from './components/FilteredBooks';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -29,13 +30,17 @@ function App() {
               <Route exact path="/">
                 <Home onSub={handleSubject} />
               </Route>
-              <Route exact path="/books" component={Books} />
-              <Route path="/book/:bookId" component={Chapters} />
-              <Route path="/:bookId/chapter/:chapterId" component={Lessons} />
-              <Route path="/:bookId/:chapterId/lesson/:lessonId" component={SingleLesson}/>
+              <Route path="/books/:subjectId">
+                <FilteredBooks subId={subject}/>
+              </Route>
+              <Route path="/:subjectId/book/:bookId" component={Chapters} />
+              <Route path="/:subjectId/:bookId/chapter/:chapterId" component={Lessons} />
+              <Route path="/:subjectId/:bookId/:chapterId/lesson/:lessonId" component={SingleLesson}/>
               <Route component={NotFound}/>
             </Switch>
           </Router>
+
+          <Footer />
         </div>
       </ApolloProvider>
     );

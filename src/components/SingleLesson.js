@@ -51,12 +51,12 @@ function SingleLesson() {
 
 
     const redirectToChapters = () => {
-        const path = `/book/${match.params.bookId}`;
+        const path = `/${match.params.subjectId}/book/${match.params.bookId}`;
         history.push(path);
     }
 
     const redirectToLessons = () => {
-        const path = `/${match.params.bookId}/chapter/${match.params.chapterId}`;
+        const path = `/${match.params.subjectId}/${match.params.bookId}/chapter/${match.params.chapterId}`;
         history.push(path);
     }
 
@@ -78,7 +78,7 @@ function SingleLesson() {
 
         if (nextIndex < navArray.length) {
             const nextId = navArray[nextIndex];
-            const path = `/${match.params.bookId}/${match.params.chapterId}/lesson/${nextId}`;
+            const path = `/${match.params.subjectId}/${match.params.bookId}/${match.params.chapterId}/lesson/${nextId}`;
             history.push(path);
         } 
         if (nextIndex === navArray.length - 1) {
@@ -100,7 +100,7 @@ function SingleLesson() {
 
         if (lastIndex >= 0) {
             const lastId = navArray[lastIndex];
-            const path = `/${match.params.bookId}/${match.params.chapterId}/lesson/${lastId}`;
+            const path = `/${match.params.subjectId}/${match.params.bookId}/${match.params.chapterId}/lesson/${lastId}`;
             history.push(path);
             if (lastIndex === 0) {
                 const btnBack = document.getElementById("back");
@@ -112,7 +112,7 @@ function SingleLesson() {
     
     return (
         <div className="lesson-main">
-            <div className="lesson-title" onClick={redirectToChapters}>
+            <div className="lesson-title">
                 <h3>{title}</h3>&nbsp;-&nbsp;<h4>{subtitle}</h4>
             </div>
 

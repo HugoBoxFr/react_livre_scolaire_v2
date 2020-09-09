@@ -13,20 +13,6 @@
     justify-content: center;
     align-items: center;
     color: white;
-    cursor: pointer;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    -ms-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
-}
-
-.index-title:hover {
-    -moz-transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -o-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    transform: scale(1.05);
 }
 
 .index-title h4, .index-title h3 {
@@ -104,8 +90,9 @@
 
 .index-nav {
     position: fixed;
+    z-index: 5;
     bottom: 50px;
-    right: 50px;
+    right: 30px;
 }
 
 .index-nav button {

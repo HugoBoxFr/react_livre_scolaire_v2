@@ -1,8 +1,4 @@
 export const subjects = [
-    {
-        "id": 277,
-        "name": "Allemand"
-      },
       {
         "id": 276,
         "name": "Espagnol"

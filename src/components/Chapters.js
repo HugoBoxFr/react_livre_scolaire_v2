@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import './chapters.css';
 
 
 function Chapters() {
     const match = useRouteMatch();
+    const history = useHistory();
     const [chapters, setChapters] = useState([]);
     const [title, setTitle] = useState('');
 
@@ -23,15 +24,23 @@ function Chapters() {
     });
 
     const filterList = (array) => {
-        let arrSort = array.sort((a, b) => {
-            return a.number - b.number;
-        });
-        setChapters(arrSort);
-        setTitle(arrSort[0].book.title);
+        if (array) {
+            let arrSort = array.sort((a, b) => {
+                return a.number - b.number;
+            });
+            setChapters(arrSort);
+            arrSort[0] ? setTitle(arrSort[0].book.title) : setTitle('');
+        }
     };
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
+
+    console.log(match);
+    const redirectToChapters = () => {
+        const path = `/books/${match.params.subjectId}/`;
+        history.push(path);
+    }
 
 
     return (
@@ -44,7 +53,7 @@ function Chapters() {
             <div className="chapters">
                 {
                     chapters.map((chapter) =>  
-                        <Link to={`/${match.params.bookId}/chapter/${chapter.id}`} key={chapter.id} style={{pointerEvents : chapter.valid ? '' : 'none'}}>
+                        <Link to={`/${match.params.subjectId}/${match.params.bookId}/chapter/${chapter.id}`} key={chapter.id} style={{pointerEvents : chapter.valid ? '' : 'none'}}>
                             <div key={chapter.id} style={{ backgroundImage: `url(${chapter.url})` }} className={chapter.valid === false ? 'chapter-false' : 'chapter-elt'}>
                                 <div className="chapter-number">
                                     <p>{chapter.number}</p>
@@ -57,6 +66,10 @@ function Chapters() {
                         </Link>
                     )
                 }
+            </div>
+
+            <div className="chapter-nav">
+                <button onClick={redirectToChapters} title="Liste"><i className="fas fa-th"></i></button>
             </div>
         </div>
     );

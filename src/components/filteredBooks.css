@@ -11,6 +11,22 @@
     color: lightblue;
 }
 
+.books-title {
+    height: 50px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.books-title h3 {
+    margin: 0;
+}
+
 .books {
     display: flex;
     flex-wrap: wrap;

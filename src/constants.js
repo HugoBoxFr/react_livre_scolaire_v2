@@ -31,7 +31,7 @@ export const POST_BOOKS = gql`
 export const POST_FILTERED_BOOKS = gql`
     query ($id: [Int]) {
         viewer {
-            books (ids: $id) {
+            books (subjectIds: $id) {
                 hits {
                     id
                     displayTitle
