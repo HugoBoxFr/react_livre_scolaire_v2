@@ -1,8 +1,9 @@
-import React  from 'react';
+import React, { useState }  from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { ApolloProvider } from 'react-apollo';
 import './App.css';
 import Navigation from './components/Navigation';
+import Home from './components/Home';
 import Books from './components/Books';
 import Chapters from './components/Chapters';
 import Lessons from './components/Lessons';
@@ -12,6 +13,12 @@ import NotFound from './components/NotFound';
 
 
 function App() {
+    const [subject, setSubject] = useState('');
+
+    function handleSubject(value) {
+        setSubject(value);
+    }
+
     return (
       <ApolloProvider client={Constants.client}>
         <div className="App">
@@ -19,7 +26,9 @@ function App() {
             <Navigation />
   
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/">
+                <Home onSub={handleSubject} />
+              </Route>
               <Route exact path="/books" component={Books} />
               <Route path="/book/:bookId" component={Chapters} />
               <Route path="/:bookId/chapter/:chapterId" component={Lessons} />
@@ -32,8 +41,5 @@ function App() {
     );
 }
 
-const Home = () => {
-  return <h1>Bienvenue sur "Le Livre Scolaire"</h1>;
-}
 
 export default App;

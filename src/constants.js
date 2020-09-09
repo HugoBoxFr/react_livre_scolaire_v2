@@ -1,7 +1,6 @@
 import ApolloClient from 'apollo-boost';
 import { gql } from 'apollo-boost';
 
-export const LINKS_PER_PAGE = 5;
 
 export const client = new ApolloClient({
   uri: "https://api-dev.lelivrescolaire.fr/graphql"
@@ -9,14 +8,36 @@ export const client = new ApolloClient({
  
 
 export const POST_BOOKS = gql`
-    query ($id: [Int], $orderBy: LinkOrderByInput) {
+    query ($id: [Int]) {
         viewer {
-            books (ids: $id, orderBy: $orderBy) {
+            books (ids: $id) {
                 hits {
                     id
                     displayTitle
                     url
                     subjects {
+                        id
+                        name
+                    }
+                    levels {
+                        name
+                    }
+                }
+            }
+        }
+    }`
+;
+
+export const POST_FILTERED_BOOKS = gql`
+    query ($id: [Int]) {
+        viewer {
+            books (ids: $id) {
+                hits {
+                    id
+                    displayTitle
+                    url
+                    subjects {
+                        id
                         name
                     }
                     levels {
@@ -110,6 +131,20 @@ export const POST_LESSONS = gql`
                             title
                         }
                     }
+                }
+            }
+        }
+    }`
+;
+
+
+export const POST_SUBJECTS = gql`
+    query {
+        viewer {
+            subjects {
+                hits {
+                    id
+                    name
                 }
             }
         }

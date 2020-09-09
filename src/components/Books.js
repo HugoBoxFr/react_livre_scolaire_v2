@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { useRouteMatch, useHistory } from 'react-router-dom';
 import "./books.css";
+// import Filter from './Filter';
 
 
 function Books() {
-    const match = useRouteMatch();
-    const history = useHistory();
-    const location = useLocation();
     const [books, setBooks] = useState([]);
+    // const [subject, setSubject] = useState('');
     
-    const { data, error, loading } = useQuery(Constants.POST_BOOKS, { 
-        variables:  {_getQueryVariables()},
-    });
+    const { data, error, loading } = useQuery(Constants.POST_BOOKS);
     
     useEffect(() => {  
         if (data) {
@@ -28,16 +24,20 @@ function Books() {
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
 
-    _getQueryVariables = () => {
-        const isNewPage = this.props.location.pathname.includes('new')
-        const page = parseInt(match.params.page, 10)
-        const orderBy = isNewPage ? 'id_DESC' : null
-        return { orderBy }
-      }
+
+    // function handleSubject(value) {
+    //     setSubject(value);
+
+    //     const filteredBooks = [];
+    //     books.map(elt => console.log(elt));
+    //     console.log(filteredBooks);
+    // }
 
 
     return (
         <div className="chapter-main">
+            {/* <Filter onChange={handleSubject}/> */}
+
             <div className="books">
                 {
                     books.map((book) =>  book.displayTitle !== null ? 
