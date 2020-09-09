@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { withRouter, Link } from "react-router-dom";
-import { useRouteMatch, useHistory } from 'react-router-dom';
+import { withRouter, Link, useRouteMatch, useHistory } from "react-router-dom";
 import "./lessons.css";
 
 
@@ -20,7 +19,7 @@ function Lessons() {
     
     useEffect(() => {
         if (data) {
-            const lessonList = data.viewer.lessons.hits
+            const lessonList = data.viewer.lessons.hits;
             filterList(lessonList);
         }
         
@@ -110,12 +109,19 @@ function Lessons() {
                     <ul>
                         {
                             lessons.map((lesson) =>  
-                                <li key={lesson.id} className="index-link">
-                                    <Link to={`/${lesson.chapter.book.id}/${lesson.chapter.id}/lesson/${lesson.id}`} >
-                                        <div>
-                                            <h5>{lesson.title}</h5>
-                                            <p style={{display : lesson.lessonType !== null ? 'block' : 'none'}}>{ lesson.lessonType }</p>
+                                <li key={lesson.id} className={lesson.valid === false ? 'index-link-false' : 'index-link'}>
+                                    <Link to={`/${match.params.bookId}/${match.params.chapterId}/lesson/${lesson.id}`} style={{pointerEvents : lesson.valid ? '' : 'none'}}>
+                                        <div className="index-info">
+                                            <div className="index-img">
+                                                { lesson.url ? <img src={lesson.img} alt="lesson.title" /> : '' }
+                                            </div>
+
+                                            <div className="index-info-title">
+                                                <h5>{lesson.title}</h5>
+                                                <p style={{display : lesson.lessonType !== null ? 'block' : 'none'}}>{ lesson.lessonType }</p>
+                                            </div>
                                         </div>
+
                                         <p>{lesson.page}</p>
                                     </Link>
                                 </li>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { withRouter } from "react-router-dom";
+import { withRouter, useRouteMatch, useHistory } from "react-router-dom";
 import './singleLesson.css';
-import { useRouteMatch, useHistory } from 'react-router-dom';
 
 
 function SingleLesson() {
@@ -35,6 +34,9 @@ function SingleLesson() {
 
         let arr = firstArray.filter(elt => elt.id === id);
         let arrChildren = arr[0].children;
+        arrChildren.map((elt, index) => !elt ? arrChildren[index] = {order: index, contentMd: null, content: null} : arrChildren[index] = elt);
+        arrChildren.map((elt) => elt.content === null ? elt.content = '' : elt);
+        arrChildren.map((elt) => elt.contentMd === null ? elt.contentMd = '' : elt);
         let arrSort = arrChildren.sort((a, b) => {
             return a.order - b.order;
         });
@@ -43,7 +45,6 @@ function SingleLesson() {
         setSubTitle(firstArray[0].chapter.title);
         setLessonTitle(arr[0].title);
     };
-
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
@@ -60,7 +61,7 @@ function SingleLesson() {
     }
 
     const getOnlyId = (array, newArray) => {
-        array.map((elt) => newArray.push(elt.id));
+        array.map((elt) => elt.valid ? newArray.push(elt.id) : '');
         return newArray;
     }
 
@@ -120,10 +121,10 @@ function SingleLesson() {
                 <hr />
 
                 {
-                    lessons.map((elt) => 
+                    lessons.map((elt, index) => 
                         elt.content ?
-                            <div key={elt.id} dangerouslySetInnerHTML={{ __html: `${elt.content}` }} /> 
-                            : <div key={elt.id} dangerouslySetInnerHTML={{ __html: `${elt.contentMd}` }} />
+                            <div key={index} dangerouslySetInnerHTML={{ __html: `${elt.content}` }} /> 
+                            : <div key={index} dangerouslySetInnerHTML={{ __html: `${elt.contentMd}` }} />
                     )
                 }
             </div>

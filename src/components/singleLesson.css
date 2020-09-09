@@ -63,8 +63,13 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: darkblue;
+    color: blue;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     outline: 0;
+}
+
+.index-nav button:disabled {
+    opacity: .5;
+    color: grey;
 }

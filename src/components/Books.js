@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import "./books.css";
 
 
 function Books() {
+    const match = useRouteMatch();
+    const history = useHistory();
+    const location = useLocation();
     const [books, setBooks] = useState([]);
     
-    const { data, error, loading } = useQuery(Constants.POST_BOOKS);
+    const { data, error, loading } = useQuery(Constants.POST_BOOKS, { 
+        variables:  {_getQueryVariables()},
+    });
     
     useEffect(() => {  
         if (data) {
@@ -21,6 +27,13 @@ function Books() {
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>Erreur : {error.toString()}</div>;
+
+    _getQueryVariables = () => {
+        const isNewPage = this.props.location.pathname.includes('new')
+        const page = parseInt(match.params.page, 10)
+        const orderBy = isNewPage ? 'id_DESC' : null
+        return { orderBy }
+      }
 
 
     return (

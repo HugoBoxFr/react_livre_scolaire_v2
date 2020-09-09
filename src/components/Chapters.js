@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import * as Constants from './../constants';
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import './chapters.css';
-import { useRouteMatch } from 'react-router-dom';
 
 
 function Chapters() {
@@ -45,7 +44,7 @@ function Chapters() {
             <div className="chapters">
                 {
                     chapters.map((chapter) =>  
-                        <Link to={`/${chapter.book.id}/chapter/${chapter.id}`} key={chapter.id} style={{pointerEvents : chapter.valid ? '' : 'none'}}>
+                        <Link to={`/${match.params.bookId}/chapter/${chapter.id}`} key={chapter.id} style={{pointerEvents : chapter.valid ? '' : 'none'}}>
                             <div key={chapter.id} style={{ backgroundImage: `url(${chapter.url})` }} className={chapter.valid === false ? 'chapter-false' : 'chapter-elt'}>
                                 <div className="chapter-number">
                                     <p>{chapter.number}</p>
