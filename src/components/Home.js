@@ -13,8 +13,6 @@ function Home(props) {
     }
 
     const subjects = Schema.subjects;
-
-    console.log(subjects);
     
     return (
         <div className="home">
