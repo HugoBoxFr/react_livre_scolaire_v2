@@ -32,25 +32,28 @@ function FilteredBooks() {
                 <h3>{title}</h3>
             </div>
 
-            <div className="books">
-                {
-                    books.map((book) =>  book.displayTitle !== null ? 
-                        <div key={book.id} className="book">
-                            <div>
-                                <Link to={`/${match.params.subjectId}/book/${book.id}`}>
-                                    <div className="title">
-                                        <h3>{book.displayTitle}</h3>
-                                    </div>
+            <div className="Section-container">
+                <div className="books">
+                    {
+                        books.map((book) =>  book.displayTitle !== null ? 
+                            <div key={book.id} className="book">
+                                <div>
+                                    <Link to={`/${match.params.subjectId}/book/${book.id}`}>
+                                        <div className="title">
+                                            <h3>{book.displayTitle}</h3>
+                                        </div>
 
-                                    <div className="cover">
-                                        { book.url != null ? <img src={book.url} alt={book.title} /> : <p>Image indisponible</p>}
-                                    </div>
-                                </Link>
-                            </div>
-                        </div> : ''
-                    )
-                }
+                                        <div className="cover">
+                                            { book.url != null ? <img src={book.url} alt={book.title} /> : <p>Image indisponible</p>}
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div> : ''
+                        )
+                    }
+                </div>
             </div>
+
         </div>
     );
 }

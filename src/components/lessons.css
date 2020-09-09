@@ -22,7 +22,7 @@
 .index-container {
     width: 500px;
     padding: 20px;
-    margin: 20px auto 0;
+    margin: 100px auto 0;
     background-color: white;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
@@ -104,15 +104,15 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: blue;
+    color: red;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     outline: 0;
 }
 
 .index-nav button:disabled {
-    opacity: .5;
-    color: grey;
+    color: lightcoral;
+    background-color: lightgrey;
 }
 
 .index-info {
@@ -126,7 +126,7 @@
     border-radius: 50%;
     overflow: hidden;
     margin-right: 10px;
-    background-color: lightblue;
+    background-color: lightcoral;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
 }

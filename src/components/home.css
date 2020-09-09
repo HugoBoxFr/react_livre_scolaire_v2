@@ -1,9 +1,68 @@
+.home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+header {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-size: cover;
+    background-position: center;
+}
+
+.home-header {
+    background-image: url('https://image.freepik.com/free-photo/close-up-students-writing-reading-exam-answer-sheets-exercises-classroom-school-with-stress_73622-858.jpg');
+}
+
+.home .title {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    text-shadow: 0 0 1px black;
+}
+
+.home .title, .home p, .home h3 {
+    text-align: left;
+}
+
+.home .title h1 {
+    width: auto;
+    margin: 0 0 0 15px;
+    font-size: 54px;
+    color: white;
+    font-family: 'Anton', sans-serif;
+    font-weight: 300;
+}
+
+.home .fas {
+    font-size: 100px;
+    font-size: 50px;
+    color: red;
+}
+
+
+.home h3 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.home-content p {
+    margin: 0 0 20px;
+    color: white;
+}
+
 .home ul {
-    width: 800px;
-    margin: 0 auto;
+    padding: 0;
+    margin: 0 0 60px;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .home ul li {
@@ -20,7 +79,7 @@
     align-items: flex-end;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
-    border: 5px solid lightblue;
+    border: 5px solid red;
     cursor: pointer;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;

@@ -7,7 +7,7 @@ function Navigation() {
         <nav className="NavBar">
             <ul>
               <li>
-                <Link to="/" title="Accueil"><i className="fas fa-home"></i></Link>
+                <Link to="/" title="Accueil"><i className="fas fa-bookmark"></i></Link>
               </li>
             </ul>
         </nav>

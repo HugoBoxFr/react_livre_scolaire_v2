@@ -39,9 +39,9 @@ function App() {
               <Route component={NotFound}/>
             </Switch>
           </Router>
-
-          <Footer />
         </div>
+
+        <Footer />
       </ApolloProvider>
     );
 }
