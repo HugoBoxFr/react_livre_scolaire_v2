@@ -1,28 +1,19 @@
 .index-main {
-    width: 1280px;
-    margin: 0 auto;
-}
-
-.index-title {
-    height: 50px;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    right: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    padding: 100px 0;
+    background-image: url('https://image.freepik.com/photos-gratuite/surface-noire-abstraite-rustique_23-2148287666.jpg');
+    background-size: cover;
+    min-height: calc(100vh - 200px);
 }
 
 .index-title h4, .index-title h3 {
     margin: 0;
+    color: orange;
 }
 
 .index-container {
     width: 500px;
     padding: 20px;
-    margin: 100px auto 0;
+    margin: 0 auto;
     background-color: white;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
@@ -104,15 +95,16 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: red;
+    color: orange;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     outline: 0;
 }
 
 .index-nav button:disabled {
-    color: lightcoral;
+    color: rgb(170, 138, 77);
     background-color: lightgrey;
+    cursor: unset;
 }
 
 .index-info {

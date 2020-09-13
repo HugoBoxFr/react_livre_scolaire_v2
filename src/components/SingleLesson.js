@@ -112,28 +112,30 @@ function SingleLesson() {
     
     return (
         <div className="lesson-main">
-            <div className="lesson-title">
-                <h3>{title}</h3>&nbsp;-&nbsp;<h4>{subtitle}</h4>
-            </div>
+            <div className="Section-container">
+                <div className="lesson-content">
+                    <div className="lesson-title">
+                        <h3>{title}</h3>
+                        <h4>{subtitle}</h4>
+                        <h5>{lessonTitle}</h5>
+                    </div>
+                    <hr />
 
-            <div className="lesson-content">
-                <h4>{lessonTitle}</h4>
-                <hr />
+                    {
+                        lessons.map((elt, index) => 
+                            elt.content ?
+                                <div key={index} dangerouslySetInnerHTML={{ __html: `${elt.content}` }} /> 
+                                : <div key={index} dangerouslySetInnerHTML={{ __html: `${elt.contentMd}` }} />
+                        )
+                    }
+                </div>
 
-                {
-                    lessons.map((elt, index) => 
-                        elt.content ?
-                            <div key={index} dangerouslySetInnerHTML={{ __html: `${elt.content}` }} /> 
-                            : <div key={index} dangerouslySetInnerHTML={{ __html: `${elt.contentMd}` }} />
-                    )
-                }
-            </div>
-
-            <div className="lesson-nav">
-                <button onClick={back} id="back" title="Précédent"><i className="fas fa-arrow-circle-left"></i></button>
-                <button onClick={redirectToChapters} title="Chapitres"><i className="fas fa-book"></i></button>
-                <button onClick={redirectToLessons} title="Leçons"><i className="fas fa-list-alt"></i></button>
-                <button onClick={next} id="next" title="Suivant"><i className="fas fa-chevron-circle-right"></i></button>
+                <div className="lesson-nav">
+                    <button onClick={back} id="back" title="Précédent"><i className="fas fa-chevron-circle-left"></i></button>
+                    <button onClick={redirectToChapters} title="Chapitres"><i className="fas fa-book"></i></button>
+                    <button onClick={redirectToLessons} title="Leçons"><i className="fas fa-list-alt"></i></button>
+                    <button onClick={next} id="next" title="Suivant"><i className="fas fa-chevron-circle-right"></i></button>
+                </div>
             </div>
         </div>
     )

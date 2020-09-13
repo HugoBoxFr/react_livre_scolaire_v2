@@ -20,7 +20,7 @@ function Home(props) {
                 <div className="Section-container">
                     <div className="title">
                         <i className="fas fa-bookmark"></i>
-                        <h1>Bienvenue sur "Le Livre Scolaire"</h1>
+                        <h1>Bienvenue sur Le Livre Scolaire</h1>
                     </div>
 
                     <div className="home-content">
@@ -30,11 +30,12 @@ function Home(props) {
                             Maecenas malesuada lacus orci, eu ornare purus faucibus id. Sed fringilla malesuada consectetur.</p>
                     </div>
                 </div>
+
             </header>
             
             <div>
                 <div className="Section-container">
-                    <h3>Choisissez un thème :</h3>
+                    <h3>Choississez votre matière ?</h3>
                     {
                         <ul>
                             {

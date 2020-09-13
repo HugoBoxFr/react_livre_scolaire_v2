@@ -7,7 +7,7 @@ import "./filteredBooks.css";
 function FilteredBooks() {
     const match = useRouteMatch();
     const [books, setBooks] = useState([]);
-    const [title, setTitle] =useState('');
+    const [title, setTitle] = useState('');
     
     const { data, error, loading } = useQuery(Constants.POST_FILTERED_BOOKS, { 
         variables:  {id: match.params.subjectId}
@@ -28,14 +28,14 @@ function FilteredBooks() {
 
     return (
         <div className="books-main">
-            <div className="books-title">
-                <h3>{title}</h3>
-            </div>
-
             <div className="Section-container">
+                <div className="books-title">
+                    <h3>{title}</h3>
+                </div>
+
                 <div className="books">
                     {
-                        books.map((book) =>  book.displayTitle !== null ? 
+                        books.map((book) =>  (book.displayTitle !== null && book.url !== null) ? 
                             <div key={book.id} className="book">
                                 <div>
                                     <Link to={`/${match.params.subjectId}/book/${book.id}`}>
@@ -53,7 +53,6 @@ function FilteredBooks() {
                     }
                 </div>
             </div>
-
         </div>
     );
 }

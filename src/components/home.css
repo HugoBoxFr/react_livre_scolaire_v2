@@ -15,7 +15,10 @@ header {
 }
 
 .home-header {
-    background-image: url('https://image.freepik.com/free-photo/close-up-students-writing-reading-exam-answer-sheets-exercises-classroom-school-with-stress_73622-858.jpg');
+    /* background-image: url('https://image.freepik.com/free-photo/close-up-students-writing-reading-exam-answer-sheets-exercises-classroom-school-with-stress_73622-858.jpg'); */
+    background-image:  url('https://image.freepik.com/photos-gratuite/surface-noire-abstraite-rustique_23-2148287666.jpg');
+    -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
 }
 
 .home .title {
@@ -34,20 +37,18 @@ header {
     margin: 0 0 0 15px;
     font-size: 54px;
     color: white;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Fredericka the Great', cursive;
     font-weight: 300;
 }
 
 .home .fas {
     font-size: 100px;
     font-size: 50px;
-    color: red;
+    color: orange;
 }
 
-
 .home h3 {
-    font-family: 'Anton', sans-serif;
-    font-weight: 300;
+    font-weight: bold;
     margin-bottom: 0;
 }
 
@@ -79,7 +80,8 @@ header {
     align-items: flex-end;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
-    border: 5px solid red;
+    border: 5px solid orange;
+    border-radius: 10px;
     cursor: pointer;
     -webkit-transition: all .5s ease;
     -moz-transition: all .5s ease;

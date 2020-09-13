@@ -44,31 +44,33 @@ function Chapters() {
 
     return (
         <div className="chapter-main">
-            <div className="chapters-title">
-                <h3>{title}</h3>
-            </div>
+            <div className="Section-container">
+                <div className="chapters-title">
+                    <h3>{title}</h3>
+                    <h4>Chapitres</h4>
+                </div>
 
-            <h4>Chapitres</h4>
-            <div className="chapters">
-                {
-                    chapters.map((chapter) =>  
-                        <Link to={`/${match.params.subjectId}/${match.params.bookId}/chapter/${chapter.id}`} key={chapter.id} style={{pointerEvents : chapter.valid ? '' : 'none'}}>
-                            <div key={chapter.id} style={{ backgroundImage: `url(${chapter.url})` }} className={chapter.valid === false ? 'chapter-false' : 'chapter-elt'}>
-                                <div className="chapter-number">
-                                    <p>{chapter.number}</p>
+                <div className="chapters">
+                    {
+                        chapters.map((chapter) =>  
+                            <Link to={`/${match.params.subjectId}/${match.params.bookId}/chapter/${chapter.id}`} key={chapter.id} style={{pointerEvents : chapter.valid ? '' : 'none'}}>
+                                <div key={chapter.id} style={{ backgroundImage: `url(${chapter.url})` }} className={chapter.valid === false ? 'chapter-false' : 'chapter-elt'}>
+                                    <div className="chapter-number">
+                                        <p>{chapter.number}</p>
+                                    </div>
+
+                                    <div className={chapter.valid === false ? 'chapter-title-false' : 'chapter-title'}>
+                                        <h5>{chapter.title}</h5>
+                                    </div>
                                 </div>
+                            </Link>
+                        )
+                    }
+                </div>
 
-                                <div className={chapter.valid === false ? 'chapter-title-false' : 'chapter-title'}>
-                                    <h5>{chapter.title}</h5>
-                                </div>
-                            </div>
-                        </Link>
-                    )
-                }
-            </div>
-
-            <div className="chapter-nav">
-                <button onClick={redirectToChapters} title="Liste"><i className="fas fa-th"></i></button>
+                <div className="chapter-nav">
+                    <button onClick={redirectToChapters} title="Liste des livres"><i className="fas fa-th"></i></button>
+                </div>
             </div>
         </div>
     );

@@ -98,42 +98,44 @@ function Lessons() {
 
     return (
         <div className="index-main">
-            <div className="index-title">
-                <h3>{title}</h3>&nbsp;-&nbsp;<h4>{subtitle}</h4>
-            </div>
+            <div className="Section-container">
+                <div className="index-container">
+                    <div className="index-title">
+                        <h3>{title}</h3>
+                        <h4>{subtitle}</h4>
+                    </div>
 
-            <div className="index-container">
-                <h4>Tables des leçons</h4>
-                <hr />
+                    <hr />
 
-                    <ul>
-                        {
-                            lessons.map((lesson) =>  
-                                <li key={lesson.id} className={lesson.valid === false ? 'index-link-false' : 'index-link'}>
-                                    <Link to={`/${match.params.subjectId}/${match.params.bookId}/${match.params.chapterId}/lesson/${lesson.id}`} style={{pointerEvents : lesson.valid ? '' : 'none'}}>
-                                        <div className="index-info">
-                                            <div className="index-img">
-                                                { lesson.url ? <img src={lesson.url} alt="lesson.title" /> : '' }
+                        <ul>
+                            {
+                                lessons.map((lesson) =>  
+                                    <li key={lesson.id} className={lesson.valid === false ? 'index-link-false' : 'index-link'}>
+                                        <Link to={`/${match.params.subjectId}/${match.params.bookId}/${match.params.chapterId}/lesson/${lesson.id}`} style={{pointerEvents : lesson.valid ? '' : 'none'}}>
+                                            <div className="index-info">
+                                                <div className="index-img">
+                                                    { lesson.url ? <img src={lesson.url} alt="lesson.title" /> : '' }
+                                                </div>
+
+                                                <div className="index-info-title">
+                                                    <h5>{lesson.title}</h5>
+                                                    <p style={{display : lesson.lessonType !== null ? 'block' : 'none'}}>{ lesson.lessonType }</p>
+                                                </div>
                                             </div>
 
-                                            <div className="index-info-title">
-                                                <h5>{lesson.title}</h5>
-                                                <p style={{display : lesson.lessonType !== null ? 'block' : 'none'}}>{ lesson.lessonType }</p>
-                                            </div>
-                                        </div>
+                                            <p>{lesson.page}</p>
+                                        </Link>
+                                    </li>
+                                )
+                            }
+                        </ul>
+                </div>
 
-                                        <p>{lesson.page}</p>
-                                    </Link>
-                                </li>
-                            )
-                        }
-                    </ul>
-            </div>
-
-            <div className="index-nav">
-                <button onClick={back} id="back-chapter" title="Précédent"><i className="fas fa-arrow-circle-left"></i></button>
-                <button onClick={redirectToChapters} title="Chapitres"><i className="fas fa-book"></i></button>
-                <button onClick={next} id="next-chapter" title="Suivant"><i className="fas fa-chevron-circle-right"></i></button>
+                <div className="index-nav">
+                    <button onClick={back} id="back-chapter" title="Précédent"><i className="fas fa-chevron-circle-left"></i></button>
+                    <button onClick={redirectToChapters} title="Chapitres"><i className="fas fa-book"></i></button>
+                    <button onClick={next} id="next-chapter" title="Suivant"><i className="fas fa-chevron-circle-right"></i></button>
+                </div>
             </div>
         </div>
     )

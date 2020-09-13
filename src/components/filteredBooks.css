@@ -1,3 +1,10 @@
+.books-main {
+    padding: 100px 0;
+    background-image: url('https://image.freepik.com/photos-gratuite/surface-noire-abstraite-rustique_23-2148287666.jpg');
+    background-size: cover;
+    height: calc(100vh - 200px);
+}
+
 .books-main h2 {
     margin: 0;
     width: 100%;
@@ -7,15 +14,7 @@
 }
 
 .books-title {
-    height: 50px;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    right: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    color: orange;
 }
 
 .books-title h3 {
@@ -25,7 +24,7 @@
 .books {
     display: flex;
     flex-wrap: wrap;
-    margin: 100px 0;
+    margin: 20px 0;
 }
 
 .loading {

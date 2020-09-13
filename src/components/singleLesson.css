@@ -1,21 +1,12 @@
 .lesson-main {
-    width: 1280px;
-    margin: 0 auto;
     padding: 100px 0;
-    display: flex;
-    justify-content: space-around;
+    background-image: url('https://image.freepik.com/photos-gratuite/surface-noire-abstraite-rustique_23-2148287666.jpg');
+    background-size: cover;
+    min-height: calc(100vh - 200px);
 }
 
 .lesson-title {
-    height: 50px;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    right: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    color: orange;
 }
 
 .lesson-title h4, .lesson-title h3 {
@@ -24,6 +15,7 @@
 
 .lesson-content {
     width: 70%;
+    margin: 0 auto;
     padding: 30px;
     background-color: white;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
@@ -50,13 +42,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: red;
+    color: orange;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     outline: 0;
 }
 
 .lesson-nav button:disabled {
-    color: lightcoral;
+    color: rgb(170, 138, 77);
     background-color: lightgrey;
+    cursor: unset;
 }
