@@ -8,7 +8,9 @@ function Navigation() {
   let history = useHistory();
 
   function handleSubject(e) {
-    history.push(`/books/${e.target.value}`);
+    if (e.target.value !== "Matières") {
+      history.push(`/books/${e.target.value}`);
+    }
   }
 
   const subjects = Schema.subjects;
@@ -24,7 +26,7 @@ function Navigation() {
           <div>
               {
                 <select onChange={handleSubject}>      
-                  <option value="Matières" style={{pointerEvents : false}}>Matières</option>
+                  <option value="Matières">Matières</option>
                   {
                     subjects.map((elt) => {
                       return (
