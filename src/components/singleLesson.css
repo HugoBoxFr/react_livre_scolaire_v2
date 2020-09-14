@@ -2,6 +2,8 @@
     padding: 100px 0;
     background-image: url('https://image.freepik.com/photos-gratuite/surface-noire-abstraite-rustique_23-2148287666.jpg');
     background-size: cover;
+    background-attachment: fixed;
+    background-position: bottom;
     min-height: calc(100vh - 200px);
 }
 
@@ -30,7 +32,7 @@
 .lesson-nav {
     position: fixed;
     bottom: 50px;
-    right: 50px;
+    right: 30px;
 }
 
 .lesson-nav button {

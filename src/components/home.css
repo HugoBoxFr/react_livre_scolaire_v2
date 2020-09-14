@@ -17,6 +17,8 @@ header {
 .home-header {
     /* background-image: url('https://image.freepik.com/free-photo/close-up-students-writing-reading-exam-answer-sheets-exercises-classroom-school-with-stress_73622-858.jpg'); */
     background-image:  url('https://image.freepik.com/photos-gratuite/surface-noire-abstraite-rustique_23-2148287666.jpg');
+    background-attachment: fixed;
+    background-position: bottom;
     -webkit-box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
 }
